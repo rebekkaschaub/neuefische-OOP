@@ -13,13 +13,18 @@ class StudentDBTest {
                 new Student("Martin","Hauser",5647),
                 new Student("Karl","Junge",8976),
                 new Student("Martin","Maier",3334)};
+        StudentDB studentDB = new StudentDB(students);
 
         //WHEN
-        StudentDB studentDB = new StudentDB(students);
         Student [] actual = studentDB.list();
 
         //THEN
-        assertArrayEquals(students,actual);
+        Student [] expected = {new Student("Johanna","Müller",123),
+                new Student("Martin","Hauser",5647),
+                new Student("Karl","Junge",8976),
+                new Student("Martin","Maier",3334)};
+
+        assertArrayEquals(expected,actual);
     }
 
     @Test
@@ -68,8 +73,7 @@ class StudentDBTest {
     @Test
     void testRemove() {
         //GIVEN
-        Student [] studentsExpected = {
-                };
+        Student [] studentsExpected = {};
 
         StudentDB expected = new StudentDB(studentsExpected);
 

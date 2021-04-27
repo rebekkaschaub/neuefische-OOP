@@ -3,11 +3,29 @@ package model;
 import model.Student;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StudentTest {
+
+    private static Arguments [] provideTestEqualsArguments() {
+        Arguments[] arguments = {
+              Arguments.of(new Student("Armin","Laschet", 876),
+                      new Student("Armin","Laschet", 876),
+                      true),
+                Arguments.of(new Student("Armin","Laschet", 876),
+                        new Student("Achim","Laschet", 876),
+                        false),
+        };
+        return arguments;
+    }
+
     //Junit erstellt bei jedem Test einen neuen model.Student
     //Student student = new Student();
 
@@ -66,13 +84,15 @@ public class StudentTest {
     }
 
 
-    @Test
-    @DisplayName("equals method should return true, when attributes are equal")
-    public void testEquals() {
-        //GIVEN
-        Student student1 = new Student("Olaf","Scholz",5678);
-        Student student2 = new Student("Olaf","Scholz",5678);
+
+    @ParameterizedTest(name = "equals() of {0} and {1} is {2}")
+    @MethodSource("provideTestEqualsArguments")
+    public void equalsTest(Student studentA, Student studentB, boolean expected){
+        //WHEN
+        boolean actual =studentA.equals(studentB);
         //THEN
-        assertEquals(student1,student2);
+        assertEquals(expected,actual);
     }
+
+
 }
