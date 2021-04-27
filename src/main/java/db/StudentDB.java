@@ -7,11 +7,11 @@ import java.util.Arrays;
 public class StudentDB {
     private Student[] students;
 
-    public StudentDB(Student [] students) {
+    public StudentDB(Student[] students) {
         this.students = students;
     }
 
-    public Student [] list(){
+    public Student[] list(){
         return students;
     }
 
