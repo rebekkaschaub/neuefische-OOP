@@ -1,5 +1,5 @@
 import model.Student;
-import model.StudentDB;
+import db.StudentDB;
 
 
 

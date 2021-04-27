@@ -1,9 +1,11 @@
-package model;
+package db;
+
+import model.Student;
 
 import java.util.Arrays;
 
 public class StudentDB {
-    private Student [] students;
+    private Student[] students;
 
     public StudentDB(Student [] students) {
         this.students = students;
@@ -13,17 +15,18 @@ public class StudentDB {
         return students;
     }
 
+    @Override
     public String toString(){
         StringBuilder studentString = new StringBuilder();
         for (Student student : students) {
-            studentString.append(student.toString()).append("\n");
+            studentString.append(student).append("\n");
         }
         return studentString.toString();
     }
 
     public Student randomStudent(){
-       double randomStudent = Math.random() * students.length;
-       return students[(int)randomStudent];
+       int random = (int)(Math.random() * students.length);
+       return students[random];
     }
 
     public void add(Student student){
@@ -31,11 +34,10 @@ public class StudentDB {
         students[students.length-1]= student;
     }
 
-    public void remove(int studentID){
+    public void remove(Student student){
         for(int i = 0; i<students.length; i++){
-            if(students[i].getId()==studentID){
+            if(students[i].equals(student)){
                 removeElement(i);
-                break;
             }
         }
     }

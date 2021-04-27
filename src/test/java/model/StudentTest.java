@@ -14,61 +14,53 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StudentTest {
 
-    private static Arguments [] provideTestEqualsArguments() {
-        Arguments[] arguments = {
-              Arguments.of(new Student("Armin","Laschet", 876),
-                      new Student("Armin","Laschet", 876),
-                      true),
-                Arguments.of(new Student("Armin","Laschet", 876),
-                        new Student("Achim","Laschet", 876),
-                        false),
-        };
-        return arguments;
-    }
-
     //Junit erstellt bei jedem Test einen neuen model.Student
     //Student student = new Student();
 
     @Test
+    @DisplayName("A students first name can be set and get")
     public void setAndGetFirstNameTest(){
         //GIVEN
         Student student = new Student();
-        String firstNameGiven = "Max";
+        String expected = "Max";
 
         //WHEN
-        student.setFirstName(firstNameGiven);
-        String firstNameActual = student.getFirstName();
+        student.setFirstName(expected);
+        String actual = student.getFirstName();
 
         //THEN
-        assertEquals(firstNameGiven,firstNameActual);
+        assertEquals(expected,actual);
     }
 
+
     @Test
+    @DisplayName("A students last name can be set and get")
     public void setAndGetLastNameTest(){
         //GIVEN
         Student student = new Student();
-        String lastNameGiven = "Planck";
+        String expected = "Planck";
 
         //WHEN
-        student.setLastName(lastNameGiven);
-        String lastNameActual = student.getLastName();
+        student.setLastName(expected);
+        String actual = student.getLastName();
 
         //THEN
-        assertEquals(lastNameGiven,lastNameActual);
+        assertEquals(expected,actual);
     }
 
     @Test
+    @DisplayName("A students id can be set and get")
     public void setAndGetIdTest(){
         //GIVEN
         Student student = new Student();
-        int idGiven = 12345;
+        int expected = 12345;
 
         //WHEN
-        student.setId(idGiven);
-        int idActual = student.getId();
+        student.setId(expected);
+        int actual = student.getId();
 
         //THEN
-        assertEquals(idGiven,idActual);
+        assertEquals(expected,actual);
     }
 
     @Test
@@ -77,8 +69,10 @@ public class StudentTest {
         //GIVEN
         Student student = new Student("Markus","Söder",156);
         String expected = "Student: Markus Söder, ID: 156";
+
         //WHEN
         String actual =student.toString();
+
         //THEN
         assertEquals(expected,actual);
     }
@@ -90,9 +84,35 @@ public class StudentTest {
     public void equalsTest(Student studentA, Student studentB, boolean expected){
         //WHEN
         boolean actual =studentA.equals(studentB);
+
         //THEN
         assertEquals(expected,actual);
     }
 
+    private static Arguments [] provideTestEqualsArguments() {
+        return new Arguments[]{
+                Arguments.of(new Student("Armin","Laschet", 876),
+                        new Student("Armin","Laschet", 876),
+                        true),
+                Arguments.of(new Student("Armin","Laschet", 876),
+                        new Student("Achim","Laschet", 876),
+                        false),
+        };
+
+    }
+
+    @Test
+    @DisplayName("Students with same name and id have the same hash code")
+    public void testHashCode(){
+        // Given
+        Student studentA = new Student("Maria","Magdalena" ,986);
+        Student studentB = new Student("Maria","Magdalena" ,986);
+
+        // When
+        boolean actual = studentA.hashCode() == studentB.hashCode();
+
+        // Then
+        assertTrue(actual);
+    }
 
 }
