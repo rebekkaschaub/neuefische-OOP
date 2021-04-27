@@ -189,4 +189,38 @@ class StudentDBTest {
 
 
     }
+
+    @Test
+    @DisplayName("find by id should return student with matching id")
+    public void findStudentByIdTest(){
+        //GIVEN
+        Student [] givenStudents ={
+                new Student("Johanna","Müller",123),
+                new Student("Karl","Junge",8976),
+                new Student("Martin","Maier",3334)
+        };
+        StudentDB studentDB = new StudentDB(givenStudents);
+
+        //WHEN
+        Student student = studentDB.findById(123);
+        //THEN
+        assertEquals(new Student("Johanna","Müller",123),student);
+    }
+
+    @Test
+    @DisplayName("find by id should return null")
+    public void findStudentByIdTest2(){
+        //GIVEN
+        Student [] givenStudents ={
+                new Student("Johanna","Müller",123),
+                new Student("Karl","Junge",8976),
+                new Student("Martin","Maier",3334)
+        };
+        StudentDB studentDB = new StudentDB(givenStudents);
+
+        //WHEN
+        Student student = studentDB.findById(14);
+        //THEN
+        assertNull(student);
+    }
 }

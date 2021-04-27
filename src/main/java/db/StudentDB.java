@@ -62,4 +62,13 @@ public class StudentDB {
     public int hashCode() {
         return Arrays.hashCode(students);
     }
+
+    public Student findById(int id){
+        for(Student student : students){
+            if(student.getId()== id){
+                return student;
+            }
+        }
+        return null;
+    }
 }
